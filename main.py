@@ -14,19 +14,15 @@ print(message)
 from typing import Optional             # gain access to the Optional[X] type hint
 
 
-def length_sum(L: list[str]) -> int:
-   if len(L) > 2:
-      result = len(L[0]) + len(L[1]) + len(L[2])  # For which call below is this statement evaluated? First
-   elif len(L) > 1:  # and what are the values being added? 4 + 2 + 3
-      result = len(L[0]) + len(L[1])  # For which call below is this statement evaluated? Third
-   elif len(L) > 0:  # and what are the values being added? 7 + 4
-      result = len(L[0])  # For which call below is this statement evaluated? None
-   else:  # and what are the values being added? None
-      result = 0
-   return result
+def surprising(L: list[str], other: str) -> list[str]:
+   L.append(other.upper())
+   return L
 
 
-first = length_sum(["this", "is", "the", "first", "call"])
-second = length_sum(["second call"])
-third = length_sum(["another", "call"])
+words = ["this", "is", "confusing", "code."]
+first = surprising(words, "Avoid")
+second = surprising(words, "such.")
+# What is the value of words at this point? ["this", "is", "confusing", "code." "Avoid", "such."]
+# What are the values of first and second at this point? Both are ["this", "is", "confusing", "code." "Avoid", "such."]
+# What happened? Changes original list using append and both calls use same list
 print()
