@@ -11,16 +11,17 @@ message = welcome_message("jfrolich@calpoly.edu")
 print(message)
 
 
-def function2(a: int, b: int, c: int) -> int:
-   if a > b and a > c:
-      return a - b  # when a is the largest
-   elif b > c:
-      return b + c  # when b>c and a is not the largest
-   else:
-      return 2 * c  # when c is greater than or equal to c and a is not the largest
+from typing import Optional             # gain access to the Optional[X] type hint
 
 
-answer1 = function2(3, 2, 1)  # What is the value of answer1? 1
-answer2 = function2(2, 3, 1)  # What is the value of answer2? 4
-answer3 = function2(2, 1, 3)  # What is the value of answer3? 6
+def checked_access(L:list[int], idx:int) -> Optional[int]:
+    test = idx >= 0 and idx < len(L)    # What is the value of test on each call? False then True
+    if test:                            # What is this check preventing? Prevents an error
+        return L[idx]
+    else:
+        return None
+
+
+first = checked_access([1, 0, 1], 9)     # What is the value of first? None
+second = checked_access([1, 0, 1], 2)    # What is the value of second? 1
 print()
